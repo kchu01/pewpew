@@ -13,6 +13,7 @@ Avoid lasers shot by enemy TIE Fighters and blast your way to victory. Move with
 ## Wireframes
 
 Start screen
+![Start screen](/imgs/title.png)
 
 Play screen with laser shooting TIE Fighter
 ![Play screen with laser shooting TIE Fighter](/imgs/starwars.jpg)
