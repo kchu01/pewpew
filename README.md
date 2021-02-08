@@ -8,23 +8,30 @@ You have been given a mission - to take down enemy TIE Fighter ships to defeat t
 
 ## Game Rules
 
-Avoid lasers shot by enemy TIE Fighters and blast your way to victory. Move with <b>left</b> and <b>right</b> arrow keys to avoid lasers. Press the <b>space bar</b> to shoot lasers at the enemy.
+1. Avoid lasers shot by enemy TIE Fighters and blast your way to victory. 
+2. Move with <b>left</b> and <b>right</b> arrow keys to avoid lasers. 
+3. Press the <b>space bar</b> to shoot lasers at the enemy.
 
 ## Wireframes
 
-Start screen
-![Start screen](/imgs/title.png)
+![Start screen](/imgs/titlescreen.png)
 
-Play screen with laser shooting TIE Fighter
+Title Screen - Press Enter to Play
+
+
 ![Play screen with laser shooting TIE Fighter](/imgs/starwars.jpg)
 
+Ship with TIE Fighter
 
 Image of player ship shot
 
+![Win](/imgs/winscreen.png)
+
 End Screen v1 - Victory
 
-End Screen v2 - Lose
+![Lose](/imgs/losescreen.png)
 
+End Screen v2 - Lose
 ## User Stories
 
 ####
