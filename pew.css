@@ -1,0 +1,17 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+    color: red;
+    background-image: url("./imgs/Blank.png");
+    
+} 
+
+canvas {
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
