@@ -5,7 +5,8 @@ html, body {
 
 body {
     text-align: center;
-    color: red;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(251, 255, 0);
     background-image: url("./imgs/Blank.png");
     
 } 

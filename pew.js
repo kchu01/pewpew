@@ -10,8 +10,10 @@ canvas.setAttribute("width", getComputedStyle(canvas)["width"])
 
 var ArrowLeft = false;
 var ArrowRight = false;
-var space = false;
-var shoot = false;
+var shooting = false;
+
+let xwing = new Ship(300, 340, "red", 20, 20)
+let tieFighter = new Ship(300, 0, "white", 20, 20)
 
 function drawBox(x, y, height, width, color) {
     ctx.fillStyle = color
@@ -21,6 +23,7 @@ function drawBox(x, y, height, width, color) {
 let gameLoopInterval = setInterval(gameLoop, 60)
 
 // classes
+// xwing ship
 class Ship {
     constructor(x, y, color, width, height) {
         this.x = x
@@ -36,56 +39,86 @@ class Ship {
     }
 }
 
-// game objects
-let xwing = new Ship(300, 340, "red", 20, 20)
-let tieFighter = new Ship(0, 0, "white", 20, 20)
-// let bullet = new Ships(0, 0, "green", 1, 4)
 
-// keypresses
-// function movement(e) {
-//     const speed = 10
-//     console.log(e)
-//     xwingMovement.innerText = `X: ${xwing.x} Y: ${xwing.y}`
-//     switch (e.key) {
-//         case (ArrowLeft):
-//             xwing.x = xwing.x - speed
-//             break
-//         case (ArrowRight):
-//             xwing.x = xwing.x + speed
-//             break
-//     }
+// xwing laser
+class Laser {
+    constructor(x, y, color, width, height) {
+        this.x = x
+        this.y = y
+        this.color = color
+        this.width = width
+        this.height = height
+    }
+    render() {
+        ctx.fillStyle = this.color
+        ctx.fillRect(this.x, this.y, this.width, this.height)
+
+        this.y = this.y - 10
+    }
+}
+
+//  tiefighter laser
+class EnemyLasers {
+    constructor(x, y, color, width, height) {
+        this.x = x
+        this.y = y
+        this.color = color
+        this.width = width
+        this.height = height
+    }
+    //need to render 
+    render() {
+        ctx.fillStyle = this.color
+        ctx.fillRect(this.x, this.y, this.width, this.height)
+
+        this.y = this.y + 10
+    }
+}
+
+let playerLasers = []
+let enemyLasers = []
+
+// game menu
+// function menu() {
+//     erase();
+//     var img = document.getElementById("title");
+//     var pat = ctx.createMenu(img, "repeat");
+//     ctx.rect(0, 0, 600, 360);
+//     ctx.fillStyle = pat;
+//     ctx.fill();
 // }
 
-document.addEventListener('keydown', function (e) {
-    // e.preventDefault();
-    if (e.keyCode === ArrowLeft) { // left
-        ArrowLeft = true;
-        console.log(e)
+// keypresses
+function movement(e) {
+    const speed = 10
+    console.log(e)
+    // xwingMovement.innerText = `X: ${xwing.x} Y: ${xwing.y}`
+    switch (e.key) {
+        case ('ArrowLeft'):
+            xwing.x = xwing.x - speed
+            break
+        case ('ArrowRight'):
+            xwing.x = xwing.x + speed
+            break
+        case (' '):
+            shoot();
+            break
     }
-    if (e.key === 39) { // right
-        ArrowRight = true;
+}
 
-    }
-    if (e.key === 32) { // SPACE
-        shoot();
+function enemy() {
 
-    }
+}
 
-})
-
-document.addEventListener('keyup', function (e) {
-    e.preventDefault();
-    if (e.key === 37) { // UP 
-        up = false;
-    }
-    if (e.key === 39) { // DOWN
-        down = false;
-    }
-});
+// shoot lasers
+function shoot() {
+    playerLasers.push(new Laser(xwing.x, xwing.y, "green", 10, 10))
+    console.log(playerLasers)
+}
 
 
 
-// render game
+// the game loop | render game
 function gameLoop() {
     // clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -96,9 +129,17 @@ function gameLoop() {
         tieFighter.render()
     }
     xwing.render()
+    for (let i = 0; i < playerLasers.length; i++) {
+        playerLasers[i].render()
+    }
+
 }
+
 
 // start game
 
 
-// document.addEventListener('keydown', e)
+document.addEventListener('keydown', movement)
+
+
+// update method or make whole new class for titeFighter lasers

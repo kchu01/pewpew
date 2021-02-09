@@ -64,3 +64,4 @@ End Screen v2 - Lose
 
 ####
 1. Keycodes | https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+2. LocalCompare | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
