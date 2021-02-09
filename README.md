@@ -61,3 +61,6 @@ End Screen v2 - Lose
 4. Add background music 
 
 ## Resources
+
+####
+1. Keycodes | https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
