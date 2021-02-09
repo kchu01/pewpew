@@ -1,28 +1,4 @@
-// DOM Selectors
-const xwingMovement = document.getElementById('movement')
-const canvas = document.getElementById('canvas')
-
-// canvas setup
-const ctx = canvas.getContext('2d')
-
-canvas.setAttribute("height", getComputedStyle(canvas)["height"])
-canvas.setAttribute("width", getComputedStyle(canvas)["width"])
-
-var ArrowLeft = false;
-var ArrowRight = false;
-var shooting = false;
-
-let xwing = new Ship(300, 340, "red", 20, 20)
-let tieFighter = new Ship(300, 0, "white", 20, 20)
-
-function drawBox(x, y, height, width, color) {
-    ctx.fillStyle = color
-    ctx.fillRect(x, y, height, width)
-}
-
-let gameLoopInterval = setInterval(gameLoop, 60)
-
-// classes
+// Classes
 // xwing ship
 class Ship {
     constructor(x, y, color, width, height) {
@@ -38,7 +14,6 @@ class Ship {
         ctx.fillRect(this.x, this.y, this.width, this.height)
     }
 }
-
 
 // xwing laser
 class Laser {
@@ -75,8 +50,32 @@ class EnemyLasers {
     }
 }
 
+// Variables
+// DOM Selectors
+const xwingMovement = document.getElementById('movement')
+const canvas = document.getElementById('canvas')
+
+// canvas setup
+const ctx = canvas.getContext('2d')
+
+canvas.setAttribute("height", getComputedStyle(canvas)["height"])
+canvas.setAttribute("width", getComputedStyle(canvas)["width"])
+
+var ArrowLeft = false;
+var ArrowRight = false;
+var shooting = false;
+
+let xwing = new Ship(300, 340, "red", 20, 20)
+let tieFighter = new Ship(300, 0, "white", 20, 20)
+
 let playerLasers = []
 let enemyLasers = []
+
+// Functions
+function drawBox(x, y, height, width, color) {
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, height, width)
+}
 
 // game menu
 // function menu() {
@@ -89,9 +88,9 @@ let enemyLasers = []
 // }
 
 // keypresses
-function movement(e) {
+function buttonHandler(e) {
     const speed = 10
-    console.log(e)
+    console.log(`Button [${e.key}] pressed`)
     // xwingMovement.innerText = `X: ${xwing.x} Y: ${xwing.y}`
     switch (e.key) {
         case ('ArrowLeft'):
@@ -116,8 +115,6 @@ function shoot() {
     console.log(playerLasers)
 }
 
-
-
 // the game loop | render game
 function gameLoop() {
     // clear the canvas
@@ -132,14 +129,11 @@ function gameLoop() {
     for (let i = 0; i < playerLasers.length; i++) {
         playerLasers[i].render()
     }
-
 }
 
-
 // start game
-
-
-document.addEventListener('keydown', movement)
-
+document.addEventListener('keydown', buttonHandler)
+const GAME_LOOP_IN_MILLISECONDS = 60
+const GAME_INTERVAL_TIMER = setInterval(gameLoop, GAME_LOOP_IN_MILLISECONDS)
 
 // update method or make whole new class for titeFighter lasers
