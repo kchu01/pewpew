@@ -65,3 +65,9 @@ End Screen v2 - Lose
 ####
 1. Keycodes | https://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
 2. LocalCompare | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
+3. Background Panning | http://devblog.lastrose.com/css-hero-image-pan/
+4. Inheritance | https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance
+5. Canvas | https://www.w3schools.com/tags/ref_canvas.asp
+6. Arrays | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?fbclid=IwAR0R6dm69t2O01_XojMU-32f4PClBG3MFJAqcH1ikfTktFCvq7ouEAQm0zQ
+7. Array.splice | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+8. Collision | https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Collision_detection

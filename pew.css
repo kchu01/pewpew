@@ -8,7 +8,8 @@ body {
     font-family: 'Courier New', Courier, monospace;
     color: rgb(251, 255, 0);
     background-image: url("./imgs/Blank.png");
-    
+    background-size: 200%;
+    animation: panning 50s infinite linear;
 } 
 
 canvas {
@@ -16,4 +17,22 @@ canvas {
     top: 0px;
     left: 0px;
     border: 1px solid yellow;
+}
+
+@keyframes panning {
+    0% {background-position: 0% 0%;}
+    25% {background-position: 100% 100%;}
+    50% {background-position: 100% 0%;}
+    75% {background-position: 0 100%;}
+    200% {background-position: 0 0;}
+  }
+
+#container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 10;
 }

@@ -132,7 +132,7 @@ function createTieFighters() {
 // keypresses
 function buttonHandler(e) {
     const speed = 10
-    console.log(`Button [${e.key}] pressed`)
+    // console.log(`Button [${e.key}] pressed`)
     // xwingMovement.innerText = `X: ${xwing.x} Y: ${xwing.y}`
     switch (e.key) {
         case ('ArrowLeft'):
@@ -147,11 +147,42 @@ function buttonHandler(e) {
     }
 }
 
-
-// shoot lasers
+// shoot xwing lasers
+// need to take push and set to var that'll call on push that'll check on location
+// track as it moves
+// once laser x y hits tiefighter run delete function
+// inside shoot can also call detect hit, if true function would render
 function shoot() {
-    playerLasers.push(new Laser(xwing.x, xwing.y, "green", 10, 10))
-    console.log(playerLasers)
+    let laser = new Laser(xwing.x, xwing.y, "green", 10, 10)
+    playerLasers.push(laser)
+    console.log(laser.x, laser.y)
+}
+
+
+// check detctetion of laser and can add xwing lasers
+// once true can remove the pixels
+// can run detction game over, deletes both, gameover can detct hit 
+function detectHit() {
+    for (let enemy = 0; enemy < tieFighterArray.length; enemy++) {
+        for (let laser = 0; laser < playerLasers.length; laser++) {
+            if (
+                // bottom 
+                playerLasers[laser].y <= tieFighterArray[enemy].y + tieFighterArray[enemy].height &&
+                // top
+                playerLasers[laser].y + playerLasers[laser].height >= tieFighterArray[enemy].y &&
+                // left
+                playerLasers[laser].x + playerLasers[laser].width >= tieFighterArray[enemy].x &&
+                //right
+                playerLasers[laser].x <= tieFighterArray[enemy].x + tieFighterArray[enemy].width
+            ) {
+                tieFighterArray.splice(enemy, 1);
+                playerLasers.splice(laser, 1);
+                console.log('hit detected')
+
+                // endGame()
+            }
+        }
+    }
 }
 
 // the game loop | render game
@@ -165,7 +196,9 @@ function gameLoop() {
     for (let index = 0; index < tieFighterArray.length; index++) {
         if (tieFighterArray[index].alive) {
             tieFighterArray[index].render()
+            detectHit()
         }
+
     }
     xwing.render()
     for (let i = 0; i < playerLasers.length; i++) {
@@ -173,10 +206,20 @@ function gameLoop() {
     }
 }
 
-// start game
+// ends the game status
+function endGame() {
+    tieFighterArray.alive = false
+
+    clearInterval(gameLoop)
+
+    xwingMovement.innerText = 'You saved the galaxy!'
+}
+
 createTieFighters()
 document.addEventListener('keydown', buttonHandler)
 const GAME_LOOP_IN_MILLISECONDS = 60
 const GAME_INTERVAL_TIMER = setInterval(gameLoop, GAME_LOOP_IN_MILLISECONDS)
 
-// update method or make whole new class for titeFighter lasers
+
+// add func tie tighters move left and right stretch
+// need to remove tie fighter or just check if it's alive before checking for collisions
