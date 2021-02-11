@@ -1,17 +1,21 @@
 // Classes
 // xwing ship
 class Ship {
-    constructor(x, y, color, width, height) {
+    constructor(x, y, color, width, height, img) {
         this.x = x
         this.y = y
         this.color = color
         this.width = width
         this.height = height
         this.alive = true
+        this.img = img
     }
     render() {
         ctx.fillStyle = this.color
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        // this.img.height = this.height
+        // this.img.width = this.width
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
+
     }
 }
 
@@ -55,10 +59,12 @@ const xwingMovement = document.getElementById('movement')
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
-// canvas.setAttribute("height", getComputedStyle(canvas)["height"])
-// canvas.setAttribute("width", getComputedStyle(canvas)["width"])
-// const CANVAS_HEIGHT = getComputedStyle(canvas)["height"];
-// const CANVAS_WIDTH = getComputedStyle(canvas)["width"];
+const tieFighterImg = new Image()
+tieFighterImg.src = "./imgs/tie_fighter.PNG"
+
+const xwingImg = new Image()
+xwingImg.src = "./imgs/xwing.PNG"
+
 const CANVAS_HEIGHT = canvas.height
 const CANVAS_WIDTH = canvas.width
 
@@ -66,7 +72,7 @@ var ArrowLeft = false;
 var ArrowRight = false;
 var shooting = false;
 
-let xwing = new Ship(300, 340, "red", 20, 20)
+let xwing = new Ship(300, 340, "red", 30, 30, xwingImg)
 
 let tieFighterArray = []
 let playerLasers = []
@@ -81,8 +87,8 @@ function drawBox(x, y, height, width, color) {
 function createTieFighters() {
     const numRows = 3;
     const numCols = 7;
-    const shipHeight = 20;
-    const shipWidth = 20;
+    const shipHeight = 30;
+    const shipWidth = 30;
 
     // calculate offset between ships in the x
     let fleetWidth = numCols * shipWidth;
@@ -109,7 +115,7 @@ function createTieFighters() {
             const canvasY = heightOfPreviousShips + heightOfEmptySpaces;
 
             // create enemy ship
-            let tieFighter = new Ship(canvasX, canvasY, "white", shipWidth, shipHeight);
+            let tieFighter = new Ship(canvasX, canvasY, "white", shipWidth, shipHeight, tieFighterImg);
             tieFighterArray.push(tieFighter)
         }
     }
@@ -158,11 +164,6 @@ function enemyShoot(x, y) {
     // console.log(enemyLasers);
 }
 
-
-
-
-// check detctetion of laser and can add xwing lasers
-// once true can remove the pixels
 // can run detction game over, deletes both, gameover can detct hit 
 function detectHit() {
     hitDection:
@@ -180,20 +181,42 @@ function detectHit() {
             ) {
                 tieFighterArray.splice(enemy, 1);
                 playerLasers.splice(laser, 1);
-                console.log('hit detected')
+                // console.log('hit detected')
                 break hitDection;
             }
         }
     }
 }
 
+function dectectXwingHit() {
+    for (let enemyShoot = 0; enemyShoot < enemyLasers.length; enemyShoot++) {
+        if (
+            // bottom
+            enemyLasers[enemyShoot].y <= xwing.y + xwing.height &&
+            // top
+            enemyLasers[enemyShoot].y + enemyLasers[enemyShoot].height >= xwing.y &&
+            // left
+            enemyLasers[enemyShoot].x + enemyLasers[enemyShoot].width >= xwing.x &&
+            // right
+            enemyLasers[enemyShoot].x <= xwing.x + xwing.width
+        ) {
+            // console.log('hit  xwing detected')
+        }
+    }
+}
+
+dectectXwingHit()
+
 // the game loop | render game
 function gameLoop() {
     // clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-
+    dectectXwingHit()
     detectHit()
     // console.log(tieFighterArray.length)
+
+    // tried making a for loop to state if !alive then end game
+    // tried setting to 0, but didnt end after all ships were destroyed
     for (let index = 0; index < tieFighterArray.length; index++) {
         if (tieFighterArray[index].alive) {
             tieFighterArray[index].render()
@@ -201,7 +224,7 @@ function gameLoop() {
             let shootRandom = Math.random()
             if (shootRandom < .01) {
                 enemyShoot(tieFighterArray[index].x, tieFighterArray[index].y)
-                console.log(tieFighterArray[index].alive)
+                // console.log(tieFighterArray[index].alive)
             }
         }
     }
