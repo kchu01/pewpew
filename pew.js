@@ -70,9 +70,8 @@ var ArrowRight = false;
 var shooting = false;
 
 let xwing = new Ship(300, 340, "red", 20, 20)
-// let tieFighter = new Ship(300, 0, "white", 20, 20)
-let tieFighterArray = []
 
+let tieFighterArray = []
 let playerLasers = []
 let enemyLasers = []
 
@@ -116,6 +115,7 @@ function createTieFighters() {
             let tieFighter = new Ship(canvasX, canvasY, "white", shipWidth, shipHeight);
             tieFighterArray.push(tieFighter)
         }
+        // enemyShoot()
     }
 }
 
@@ -147,22 +147,29 @@ function buttonHandler(e) {
     }
 }
 
-// shoot xwing lasers
-// need to take push and set to var that'll call on push that'll check on location
-// track as it moves
-// once laser x y hits tiefighter run delete function
-// inside shoot can also call detect hit, if true function would render
 function shoot() {
-    let laser = new Laser(xwing.x, xwing.y, "green", 10, 10)
+    let laser = new Laser(xwing.x, xwing.y, "rgb(255, 81, 0)", 10, 10)
     playerLasers.push(laser)
     console.log(laser.x, laser.y)
 }
+
+
+
+function enemyShoot(x, y) {
+
+    let tiefighterShoot = new EnemyLasers(x, y, "green", 10, 10)
+    enemyLasers.push(tiefighterShoot)
+    // console.log(enemyLasers);
+}
+
+
 
 
 // check detctetion of laser and can add xwing lasers
 // once true can remove the pixels
 // can run detction game over, deletes both, gameover can detct hit 
 function detectHit() {
+    hitDection:
     for (let enemy = 0; enemy < tieFighterArray.length; enemy++) {
         for (let laser = 0; laser < playerLasers.length; laser++) {
             if (
@@ -178,8 +185,7 @@ function detectHit() {
                 tieFighterArray.splice(enemy, 1);
                 playerLasers.splice(laser, 1);
                 console.log('hit detected')
-
-                // endGame()
+                break hitDection;
             }
         }
     }
@@ -189,20 +195,27 @@ function detectHit() {
 function gameLoop() {
     // clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    // check for collisions
-    // detectHit()
-    // render our game objects!
 
+    detectHit()
+    console.log(tieFighterArray.length)
     for (let index = 0; index < tieFighterArray.length; index++) {
         if (tieFighterArray[index].alive) {
             tieFighterArray[index].render()
-            detectHit()
-        }
 
+            let shootRandom = Math.random()
+            if (shootRandom < .01) {
+                enemyShoot(tieFighterArray[index].x, tieFighterArray[index].y)
+            }
+        }
+        // console.log(Math.random())
     }
     xwing.render()
     for (let i = 0; i < playerLasers.length; i++) {
         playerLasers[i].render()
+    }
+
+    for (let j = 0; j < enemyLasers.length; j++) {
+        enemyLasers[j].render()
     }
 }
 
