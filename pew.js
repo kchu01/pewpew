@@ -50,12 +50,9 @@ class EnemyLasers {
     }
 }
 
-// Variables
-// DOM Selectors
+// Variables and DOM Selectors
 const xwingMovement = document.getElementById('movement')
 const canvas = document.getElementById('canvas')
-
-// canvas setup
 const ctx = canvas.getContext('2d')
 
 // canvas.setAttribute("height", getComputedStyle(canvas)["height"])
@@ -115,7 +112,6 @@ function createTieFighters() {
             let tieFighter = new Ship(canvasX, canvasY, "white", shipWidth, shipHeight);
             tieFighterArray.push(tieFighter)
         }
-        // enemyShoot()
     }
 }
 
@@ -197,7 +193,7 @@ function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     detectHit()
-    console.log(tieFighterArray.length)
+    // console.log(tieFighterArray.length)
     for (let index = 0; index < tieFighterArray.length; index++) {
         if (tieFighterArray[index].alive) {
             tieFighterArray[index].render()
@@ -205,9 +201,9 @@ function gameLoop() {
             let shootRandom = Math.random()
             if (shootRandom < .01) {
                 enemyShoot(tieFighterArray[index].x, tieFighterArray[index].y)
+                console.log(tieFighterArray[index].alive)
             }
         }
-        // console.log(Math.random())
     }
     xwing.render()
     for (let i = 0; i < playerLasers.length; i++) {
@@ -221,7 +217,7 @@ function gameLoop() {
 
 // ends the game status
 function endGame() {
-    tieFighterArray.alive = false
+
 
     clearInterval(gameLoop)
 
