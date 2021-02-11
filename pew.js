@@ -21,16 +21,17 @@ class Ship {
 
 // xwing laser
 class Laser {
-    constructor(x, y, color, width, height) {
+    constructor(x, y, color, width, height, img) {
         this.x = x
         this.y = y
         this.color = color
         this.width = width
         this.height = height
+        this.img = img
     }
     render() {
         ctx.fillStyle = this.color
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
 
         this.y = this.y - 10
     }
@@ -38,17 +39,18 @@ class Laser {
 
 //  tiefighter laser
 class EnemyLasers {
-    constructor(x, y, color, width, height) {
+    constructor(x, y, color, width, height, img) {
         this.x = x
         this.y = y
         this.color = color
         this.width = width
         this.height = height
+        this.img = img
     }
     //need to render 
     render() {
         ctx.fillStyle = this.color
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
 
         this.y = this.y + 10
     }
@@ -59,11 +61,18 @@ const xwingMovement = document.getElementById('movement')
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
+// images
 const tieFighterImg = new Image()
 tieFighterImg.src = "./imgs/tie_fighter.PNG"
 
 const xwingImg = new Image()
 xwingImg.src = "./imgs/xwing.PNG"
+
+const tieFighterLaserImg = new Image()
+tieFighterLaserImg.src = "./imgs/enemy_laser.PNG"
+
+const xwingLaserImg = new Image()
+xwingLaserImg.src = "./imgs/xwing_laser.PNG"
 
 const CANVAS_HEIGHT = canvas.height
 const CANVAS_WIDTH = canvas.width
@@ -150,16 +159,16 @@ function buttonHandler(e) {
 }
 
 function shoot() {
-    let laser = new Laser(xwing.x, xwing.y, "rgb(255, 81, 0)", 10, 10)
+    let laser = new Laser(xwing.x, xwing.y, "rgb(255, 81, 0)", 5, 20, xwingLaserImg)
     playerLasers.push(laser)
-    console.log(laser.x, laser.y)
+    // console.log(laser.x, laser.y)
 }
 
 
 
 function enemyShoot(x, y) {
 
-    let tiefighterShoot = new EnemyLasers(x, y, "green", 10, 10)
+    let tiefighterShoot = new EnemyLasers(x, y, "green", 5, 20, tieFighterLaserImg)
     enemyLasers.push(tiefighterShoot)
     // console.log(enemyLasers);
 }
