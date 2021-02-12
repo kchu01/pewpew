@@ -60,10 +60,15 @@ const xwingMovement = document.getElementById('movement')
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
-
-
 // buttons
-let startBtn = document.getElementById('startBtn')
+
+const modalBtn = document.querySelector('#play')
+const modalBg = document.querySelector('.modal-bg')
+
+modalBtn.addEventListener('click', function () {
+    modalBg.remove(modalBg)
+})
+
 
 // images
 const tieFighterImg = new Image()
@@ -158,8 +163,6 @@ function shoot() {
     // console.log(laser.x, laser.y)
 }
 
-
-
 function enemyShoot(x, y) {
 
     let tiefighterShoot = new EnemyLasers(x, y, "green", 5, 20, tieFighterLaserImg)
@@ -208,8 +211,6 @@ function dectectXwingHit() {
     }
 }
 
-
-
 // the game loop | render game
 function gameLoop() {
 
@@ -220,8 +221,6 @@ function gameLoop() {
 
     // console.log(tieFighterArray.length)
 
-    // tried making a for loop to state if !alive then end game
-    // tried setting to 0, but didnt end after all ships were destroyed
     for (let index = 0; index < tieFighterArray.length; index++) {
         // (tieFighterArray[index].alive) {
         tieFighterArray[index].render()
@@ -231,52 +230,46 @@ function gameLoop() {
             enemyShoot(tieFighterArray[index].x, tieFighterArray[index].y)
             // console.log(tieFighterArray[index].alive)
         }
-        // }
-
     }
     xwing.render()
     for (let i = 0; i < playerLasers.length; i++) {
-
         playerLasers[i].render()
-
     }
-    // if xwing.alive = true, use equality
 
     for (let j = 0; j < enemyLasers.length; j++) {
         enemyLasers[j].render()
-
     }
     // debugger
     if (tieFighterArray.length === 0) {
-
-        // alert("You win")
+        endGameWin()
     }
 
     if (!xwing.alive) {
-        alert('you lose')
+        endGameLose()
     }
 }
 
+const endGameLose = () => {
+    clearInterval(gameLoop)
+    ctx.rect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = "black"
+    ctx.fill()
 
+    ctx.font = "20px Bungee";
+    ctx.fillStyle = "rgb(244, 222, 96)"
+    ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2)
+}
 
-// ends the game status
-// function isGameOver() {
-//     let gameOver = false
+const endGameWin = () => {
+    clearInterval(gameLoop)
+    ctx.rect(0, 0, canvas.width, canvas.height)
+    ctx.fillStyle = "black"
+    ctx.fill()
 
-//     ctx.fillStyle = 'black';
-//     ctx.clearRect(0, 0, canvas.width, canvas.height)
-//     clearInterval(gameLoop)
-
-//     if (tieFighterArray.length === 0) {
-//         // gameOver = true
-//         // alert("YOU WON")
-//         // document.location.reload();
-//     }
-
-//     xwingMovement.innerText = 'You saved the galaxy!'
-// }
-
-// console.log(gameOver)
+    ctx.font = "20px Bungee";
+    ctx.fillStyle = "rgb(244, 222, 96)"
+    ctx.fillText("YOU SAVED THE GALAXY", canvas.width / 2, canvas.height / 2)
+}
 
 createTieFighters()
 document.addEventListener('keydown', buttonHandler)
