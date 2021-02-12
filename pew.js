@@ -18,7 +18,6 @@ class Ship {
 
     }
 }
-
 // xwing laser
 class Laser {
     constructor(x, y, color, width, height, img) {
@@ -61,6 +60,8 @@ const xwingMovement = document.getElementById('movement')
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
+
+
 // buttons
 let startBtn = document.getElementById('startBtn')
 
@@ -72,10 +73,10 @@ const xwingImg = new Image()
 xwingImg.src = "./imgs/xwing.PNG"
 
 const tieFighterLaserImg = new Image()
-tieFighterLaserImg.src = "./imgs/enemy_laser.PNG"
+tieFighterLaserImg.src = "./imgs/enemy_laser.png"
 
 const xwingLaserImg = new Image()
-xwingLaserImg.src = "./imgs/xwing_laser.PNG"
+xwingLaserImg.src = "./imgs/xwing_laser.png"
 
 const CANVAS_HEIGHT = canvas.height
 const CANVAS_WIDTH = canvas.width
@@ -97,8 +98,8 @@ function drawBox(x, y, height, width, color) {
 }
 
 function createTieFighters() {
-    const numRows = 2;
-    const numCols = 6;
+    const numRows = 3;
+    const numCols = 7;
     const shipHeight = 30;
     const shipWidth = 30;
 
@@ -132,16 +133,6 @@ function createTieFighters() {
         }
     }
 }
-
-// game menu
-// function menu() {
-//     erase();
-//     var img = document.getElementById("title");
-//     var pat = ctx.createMenu(img, "repeat");
-//     ctx.rect(0, 0, 600, 360);
-//     ctx.fillStyle = pat;
-//     ctx.fill();
-// }
 
 // keypresses
 function buttonHandler(e) {
@@ -222,8 +213,6 @@ function dectectXwingHit() {
 // the game loop | render game
 function gameLoop() {
 
-    startBtn.style.display = 'none';
-
     // clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     dectectXwingHit()
@@ -260,13 +249,15 @@ function gameLoop() {
     // debugger
     if (tieFighterArray.length === 0) {
 
-        alert("You win")
+        // alert("You win")
     }
 
     if (!xwing.alive) {
         alert('you lose')
     }
 }
+
+
 
 // ends the game status
 // function isGameOver() {
