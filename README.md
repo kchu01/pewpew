@@ -71,4 +71,5 @@ End Screen v2 - Lose
 6. Arrays | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?fbclid=IwAR0R6dm69t2O01_XojMU-32f4PClBG3MFJAqcH1ikfTktFCvq7ouEAQm0zQ
 7. Array.splice | https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 8. Collision | https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Collision_detection
-9. Draw Image | https://www.w3schools.com/tags/canvas_drawimage.asp
+9. Collision 2 | https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
+10. Draw Image | https://www.w3schools.com/tags/canvas_drawimage.asp

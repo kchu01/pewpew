@@ -61,6 +61,9 @@ const xwingMovement = document.getElementById('movement')
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
+// buttons
+let startBtn = document.getElementById('startBtn')
+
 // images
 const tieFighterImg = new Image()
 tieFighterImg.src = "./imgs/tie_fighter.PNG"
@@ -94,8 +97,8 @@ function drawBox(x, y, height, width, color) {
 }
 
 function createTieFighters() {
-    const numRows = 3;
-    const numCols = 7;
+    const numRows = 2;
+    const numCols = 6;
     const shipHeight = 30;
     const shipWidth = 30;
 
@@ -209,58 +212,82 @@ function dectectXwingHit() {
             // right
             enemyLasers[enemyShoot].x <= xwing.x + xwing.width
         ) {
-            // console.log('hit  xwing detected')
+            xwing.alive = false
         }
     }
 }
 
-dectectXwingHit()
+
 
 // the game loop | render game
 function gameLoop() {
+
+    startBtn.style.display = 'none';
+
     // clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     dectectXwingHit()
     detectHit()
+
     // console.log(tieFighterArray.length)
 
     // tried making a for loop to state if !alive then end game
     // tried setting to 0, but didnt end after all ships were destroyed
     for (let index = 0; index < tieFighterArray.length; index++) {
-        if (tieFighterArray[index].alive) {
-            tieFighterArray[index].render()
+        // (tieFighterArray[index].alive) {
+        tieFighterArray[index].render()
 
-            let shootRandom = Math.random()
-            if (shootRandom < .01) {
-                enemyShoot(tieFighterArray[index].x, tieFighterArray[index].y)
-                // console.log(tieFighterArray[index].alive)
-            }
+        let shootRandom = Math.random()
+        if (shootRandom < .01) {
+            enemyShoot(tieFighterArray[index].x, tieFighterArray[index].y)
+            // console.log(tieFighterArray[index].alive)
         }
+        // }
+
     }
     xwing.render()
     for (let i = 0; i < playerLasers.length; i++) {
+
         playerLasers[i].render()
+
     }
+    // if xwing.alive = true, use equality
 
     for (let j = 0; j < enemyLasers.length; j++) {
         enemyLasers[j].render()
+
+    }
+    // debugger
+    if (tieFighterArray.length === 0) {
+
+        alert("You win")
+    }
+
+    if (!xwing.alive) {
+        alert('you lose')
     }
 }
 
 // ends the game status
-function endGame() {
+// function isGameOver() {
+//     let gameOver = false
 
+//     ctx.fillStyle = 'black';
+//     ctx.clearRect(0, 0, canvas.width, canvas.height)
+//     clearInterval(gameLoop)
 
-    clearInterval(gameLoop)
+//     if (tieFighterArray.length === 0) {
+//         // gameOver = true
+//         // alert("YOU WON")
+//         // document.location.reload();
+//     }
 
-    xwingMovement.innerText = 'You saved the galaxy!'
-}
+//     xwingMovement.innerText = 'You saved the galaxy!'
+// }
+
+// console.log(gameOver)
 
 createTieFighters()
 document.addEventListener('keydown', buttonHandler)
 const GAME_LOOP_IN_MILLISECONDS = 60
 const GAME_INTERVAL_TIMER = setInterval(gameLoop, GAME_LOOP_IN_MILLISECONDS)
-
-
-// add func tie tighters move left and right stretch
-// need to remove tie fighter or just check if it's alive before checking for collisions
