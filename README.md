@@ -46,11 +46,10 @@ End Screen v2 - Lose
 
 #### 
 1. Start screen that offers a start button and instructions on how to play
-2. Displays the score (how many ships you have hit)
-3. Player is able to move and shoot their X-Wing (left and right motion, space bar to shoot)
-4. TIE Fighters are at a fixed location but can shoot
-5. Hit detection for both X-Wing and TIE Fighter (use canvas to assist with detection)
-6. End screen that includes "You saved the galaxy!" or "Your ship has been destroyed!" depending if the player wins or loses
+2. Player is able to move and shoot their X-Wing (left and right motion, space bar to shoot)
+3. TIE Fighters are at a fixed location but can shoot
+4. Hit detection for both X-Wing and TIE Fighter (use canvas to assist with detection)
+5. End screen that includes "You saved the galaxy!" or "Your ship has been destroyed!" depending if the player wins or loses
 
 ## Stretch Goals | Bonus
 
@@ -59,6 +58,7 @@ End Screen v2 - Lose
 2. A final boss - Death Star!
 3. Add sound when lasers are shot
 4. Add background music 
+5. Continuous movement (shoot and move at the same time)
 
 ## Resources
 

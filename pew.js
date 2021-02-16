@@ -157,9 +157,12 @@ function buttonHandler(e) {
     }
 }
 
+// add second laser with width!
 function shoot() {
     let laser = new Laser(xwing.x, xwing.y, "rgb(255, 81, 0)", 5, 20, xwingLaserImg)
+    let laserTwo = new Laser(xwing.x + 300, xwing.y + 300, "rgb(255, 81, 0)", 5, 20, xwingLaserImg)
     playerLasers.push(laser)
+    playerLasers.push(laserTwo)
     // console.log(laser.x, laser.y)
 }
 
