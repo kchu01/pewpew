@@ -2,6 +2,9 @@
 
 Play the classic 1981 fixed shooter game, Galaga, though HTML5, CSS, and JavaScript! Stylized through the world of Star Wars.
 
+Link to deployed site:
+https://kchu01.github.io/
+
 ## Overview
 
 You have been given a mission - to take down enemy TIE Fighter ships to defeat the Galactic Empire and save the galaxy!
